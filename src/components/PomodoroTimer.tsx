@@ -34,7 +34,7 @@ export function PomodoroTimer() {
       <h2 className="text-2xl font-light text-gray-400">pomodoro timer</h2>
       <ProgressDots cycles={cycles} />
       <div className="text-6xl font-light">{formatTime(timeLeft)}</div>
-      <div className="text-sm uppercase tracking-wide text-gray-400">{mode.replace(/([A-Z])/g, ' $1').trim()}</div>
+      <div className="text-sm uppercase tracking-wide text-gray-400">{mode.replace(/([A-Z])/g, ' $1').trim()}</div> 
       <div className="flex gap-4">
         <button
           onClick={toggleTimer}
@@ -55,7 +55,7 @@ export function PomodoroTimer() {
             onClick={skipWork}
             className="flex items-center justify-center px-4 py-2 rounded-full border border-white/60 text-white/60 hover:bg-white hover:text-black transition-colors text-sm"
           >
-            Test: Skip Work
+            skip work
           </button>
         )}
       </div>
