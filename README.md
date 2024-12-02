@@ -12,7 +12,7 @@
 - [x] add reset button to distraction counter
 - [x] add skip button to breaks
 - [x] TEST: add skip button for work
-- [ ] Add sound for work and break ending (MOST IMP)
+- [x] Add sound for work and break ending (MOST IMP)
 - [ ] Add PostHog Analytics and setup a dashboard
 - [ ] remove test
 - [ ] add subtle animation to dots

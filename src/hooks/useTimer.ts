@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { TimerMode } from '../types/timer';
 
 export const useTimer = (initialDuration: number) => {
@@ -6,6 +6,10 @@ export const useTimer = (initialDuration: number) => {
   const [isRunning, setIsRunning] = useState(false);
   const [mode, setMode] = useState<TimerMode>('work');
   const [cycles, setCycles] = useState(0);
+  
+  // Add sound references
+  const workSoundRef = useRef(new Audio('/sounds/focus2mc.mp3'));
+  const breakSoundRef = useRef(new Audio('/sounds/break1mc.mp3'));
 
   const getDuration = (mode: TimerMode): number => {
     switch (mode) {
@@ -15,9 +19,18 @@ export const useTimer = (initialDuration: number) => {
     }
   };
 
+  // Helper function to play sounds
+  const playSound = (newMode: TimerMode) => {
+    if (newMode === 'work') {
+      workSoundRef.current.play().catch(err => console.error('Error playing sound:', err));
+    } else {
+      breakSoundRef.current.play().catch(err => console.error('Error playing sound:', err));
+    }
+  };
+
   useEffect(() => {
     let interval: NodeJS.Timeout | undefined;
-    
+
     if (isRunning && timeLeft > 0) {
       interval = setInterval(() => {
         setTimeLeft((prev) => prev - 1);
@@ -29,19 +42,22 @@ export const useTimer = (initialDuration: number) => {
         if (newCycles % 4 === 0) {
           setMode('longBreak');
           setTimeLeft(getDuration('longBreak'));
+          playSound('longBreak');  // Play break sound
         } else {
           setMode('break');
           setTimeLeft(getDuration('break'));
+          playSound('break');  // Play break sound
         }
       } else {
         if (mode === 'longBreak') {
-          setCycles(0); // Reset cycles after long break
+          setCycles(0);
         }
         setMode('work');
         setTimeLeft(getDuration('work'));
+        playSound('work');  // Play work sound
       }
     }
-    
+
     return () => {
       if (interval) clearInterval(interval);
     };
