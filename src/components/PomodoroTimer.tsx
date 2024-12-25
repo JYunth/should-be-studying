@@ -43,7 +43,10 @@ export function PomodoroTimer() {
           className="w-12 h-12 rounded-full flex items-center justify-center opacity-80 hover:bg-white group"
           onClick={toggleTimer}
         >
-          {isRunning ? <Pause size={20} className="text-white group-hover:text-black" /> : <Play size={20} className="text-white group-hover:text-black" />}
+          {isRunning ? 
+            <Pause size={20} className="text-white group-hover:text-black" /> : 
+            <Play size={20} className="text-white group-hover:text-black pl-0.5" />
+          }
         </Button>
         {(mode === 'break' || mode === 'longBreak') && (
           <Button

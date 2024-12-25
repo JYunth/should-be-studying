@@ -34,7 +34,7 @@ export function DistractionCounter() {
         onClick={reset}
         startContent={<RotateCcw size={16} className="text-white group-hover:text-black" />}
       >
-        reset
+        <span className="pb-0.5">reset</span>
       </Button>
     </div>
   );

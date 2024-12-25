@@ -13,8 +13,8 @@
 - [x] add skip button to breaks
 - [x] TEST: add skip button for work
 - [x] Add sound for work and break ending (MOST IMP)
-- [ ] Add PostHog Analytics and setup a dashboard
-- [ ] remove test
-- [ ] add subtle animation to dots
+- [x] Add vercel Analytics and setup a dashboard
+- [x] add subtle animation to dots
 - [ ] add a settings button and a modal for time setting
 - [ ] add smol footer
+- [ ] remove test
