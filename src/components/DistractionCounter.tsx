@@ -1,5 +1,6 @@
 import React from 'react';
 import { Plus, Minus, RotateCcw } from 'lucide-react';
+import { Button } from '@nextui-org/react';
 import { useKeyboardCounter } from '../hooks/useKeyboardCounter';
 
 export function DistractionCounter() {
@@ -10,26 +11,31 @@ export function DistractionCounter() {
       <h2 className="text-2xl font-light text-gray-400">distraction counter</h2>
       <div className="text-6xl font-light">{count}</div>
       <div className="flex gap-4">
-        <button
+        <Button
+          isIconOnly
+          variant="bordered"
+          className="w-12 h-12 rounded-full flex items-center justify-center opacity-80 hover:bg-white group"
           onClick={decrement}
-          className="flex items-center justify-center w-12 h-12 rounded-full border border-white/80 hover:bg-white hover:text-black transition-colors"
         >
-          <Minus size={20} />
-        </button>
-        <button
+          <Minus size={20} className="text-white group-hover:text-black" />
+        </Button>
+        <Button
+          isIconOnly
+          variant="bordered"
+          className="w-12 h-12 rounded-full flex items-center justify-center opacity-80 hover:bg-white group"
           onClick={increment}
-          className="flex items-center justify-center w-12 h-12 rounded-full border border-white/80 hover:bg-white hover:text-black transition-colors"
         >
-          <Plus size={20} />
-        </button>
+          <Plus size={20} className="text-white group-hover:text-black" />
+        </Button>
       </div>
-      <button
+      <Button
+        variant="bordered"
+        className="h-12 px-6 opacity-80 rounded-full text-white hover:bg-white hover:text-black group"
         onClick={reset}
-        className="flex items-center justify-center px-6 py-2 rounded-full border border-white/80 hover:bg-white hover:text-black transition-colors gap-2"
+        startContent={<RotateCcw size={16} className="text-white group-hover:text-black" />}
       >
-        <RotateCcw size={16} />
-        <span>Reset</span>
-      </button>
+        reset
+      </Button>
     </div>
   );
 }
