@@ -1,16 +1,18 @@
-const {nextui} = require("@nextui-org/react");
+import { nextui } from "@nextui-org/react";
+import type { Config } from 'tailwindcss';
 
-/** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}',
+  content: [
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
       keyframes: {
         'dot-pulse': {
-          '0%, 100%': { backgroundColor: 'rgba(255, 255, 255, 0.1)' },
-          '50%': { backgroundColor: 'rgba(255, 255, 255, 0.7)' },
+          '0%, 100%': { backgroundColor: 'rgb(255 255 255 / 0.1)' },
+          '50%': { backgroundColor: 'rgb(255 255 255 / 0.5)' },
         },
       },
       animation: {
@@ -20,4 +22,4 @@ export default {
   },
   darkMode: "class",
   plugins: [nextui()],
-};
+} satisfies Config; 
