@@ -12,7 +12,7 @@ export default {
       keyframes: {
         'dot-pulse': {
           '0%, 100%': { backgroundColor: 'rgb(255 255 255 / 0.1)' },
-          '50%': { backgroundColor: 'rgb(255 255 255 / 0.5)' },
+          '50%': { backgroundColor: 'rgb(255 255 255 / 0.7)' },
         },
       },
       animation: {
