@@ -1,4 +1,3 @@
-import React from 'react';
 import { TimerMode } from '../types/timer';
 
 interface ProgressDotsProps {

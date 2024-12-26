@@ -346,7 +346,7 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
               <ModalFooter>
                 <Button 
                   variant="light" 
-                  onClick={() => setIsAboutOpen(false)}
+                  onClick={onClose}
                   className="text-white"
                 >
                   Close

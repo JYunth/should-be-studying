@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
 import { Play, Pause, SkipForward } from 'lucide-react';
 import { Button } from '@nextui-org/react';
+import { useEffect } from 'react';
 import { useTimer } from '../hooks/useTimer';
 import { formatTime } from '../utils/timeUtils';
 import { ProgressDots } from './ProgressDots';
