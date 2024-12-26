@@ -24,22 +24,28 @@ const DEFAULT_SETTINGS: TimerSettings = {
   workMinutes: "50",
   breakMinutes: "10",
   longBreakMinutes: "30",
-  workSound: "focus1",
-  breakSound: "break1"
+  workSound: "focus2mc",
+  breakSound: "break1mc"
 };
 
 // Static arrays for focus and break sounds
 const FOCUS_SOUNDS = [
   'focus1.mp3',
-  'focus2.mp3',
+  'focus2mc.mp3',
   'focus3.mp3'
 ];
 
 const BREAK_SOUNDS = [
-  'break1.mp3',
+  'break1mc.mp3',
   'break2.mp3',
   'break3.mp3'
 ];
+
+// Add this function at component level
+const playSound = (soundName: string) => {
+  const audio = new Audio(`/sounds/${soundName}.mp3`);
+  audio.play().catch(error => console.error('Error playing sound:', error));
+};
 
 export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
   const [workTime, setWorkTime] = useState(DEFAULT_SETTINGS.workMinutes);
@@ -224,7 +230,10 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
             labelPlacement="outside"
             placeholder="Select a sound"
             value={workSound}
-            onChange={(e) => setWorkSound(e.target.value)}
+            onChange={(e) => {
+              setWorkSound(e.target.value);
+              playSound(e.target.value);
+            }}
             classNames={{
               label: "!text-white",
               trigger: "!bg-white/10",
@@ -245,7 +254,10 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
             labelPlacement="outside"
             placeholder="Select a sound"
             value={breakSound}
-            onChange={(e) => setBreakSound(e.target.value)}
+            onChange={(e) => {
+              setBreakSound(e.target.value);
+              playSound(e.target.value);
+            }}
             classNames={{
               label: "!text-white",
               trigger: "!bg-white/10",
