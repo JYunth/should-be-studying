@@ -70,7 +70,7 @@ export function PomodoroTimer() {
   return (
     <div className="flex flex-col items-center space-y-6 text-white">
       <h2 className="text-2xl font-light text-gray-400">pomodoro timer</h2>
-      <ProgressDots cycles={cycles} />
+      <ProgressDots cycles={cycles} mode={mode} />
       <div className="text-6xl font-light">{formatTime(timeLeft)}</div>
       <div className="text-sm uppercase tracking-wide text-gray-400">{mode.replace(/([A-Z])/g, ' $1').trim()}</div>
       <div className="flex gap-4">
