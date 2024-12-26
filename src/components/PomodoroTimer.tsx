@@ -1,11 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Play, Pause, SkipForward } from 'lucide-react';
 import { Button } from '@nextui-org/react';
 import { useTimer } from '../hooks/useTimer';
 import { formatTime } from '../utils/timeUtils';
 import { ProgressDots } from './ProgressDots';
+import { TimerSettings } from '../types/timer';
 
 export function PomodoroTimer() {
+  // Get initial settings from localStorage
+  const getInitialSettings = (): TimerSettings => {
+    const savedSettings = localStorage.getItem('timerSettings');
+    if (savedSettings) {
+      return JSON.parse(savedSettings);
+    }
+    return {
+      workMinutes: "50",
+      breakMinutes: "10",
+      longBreakMinutes: "30",
+      workSound: "focus2mc",
+      breakSound: "break1mc"
+    };
+  };
+
+  const settings = getInitialSettings();
+  
   const {
     timeLeft,
     isRunning,
@@ -15,7 +33,26 @@ export function PomodoroTimer() {
     setIsRunning,
     setMode,
     getDuration
-  } = useTimer(50 * 60);
+  } = useTimer(parseInt(settings.workMinutes) * 60, settings);
+
+  // Listen for settings changes in localStorage
+  useEffect(() => {
+    const handleSettingsChange = () => {
+      const newSettings = getInitialSettings();
+      // Only reset if timer is not running
+      if (!isRunning) {
+        setTimeLeft(parseInt(newSettings.workMinutes) * 60);
+      }
+    };
+
+    window.addEventListener('storage', handleSettingsChange);
+    window.addEventListener('settingsUpdated', handleSettingsChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleSettingsChange);
+      window.removeEventListener('settingsUpdated', handleSettingsChange);
+    };
+  }, [isRunning, setTimeLeft]);
 
   const toggleTimer = () => setIsRunning(!isRunning);
 
