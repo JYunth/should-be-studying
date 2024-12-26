@@ -293,7 +293,7 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
             <Button
               variant="light"
               className="text-white/50 hover:text-white"
-              onClick={() => setIsAboutOpen(true)}
+              onPress={() => setIsAboutOpen(true)}
             >
               About
             </Button>
@@ -301,13 +301,13 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
               <Button
                 variant="bordered"
                 className="text-white border-white/20"
-                onClick={onClose}
+                onPress={onClose}
               >
                 Cancel
               </Button>
               <Button
                 className="bg-white text-black"
-                onClick={handleSave}
+                onPress={handleSave}
               >
                 Save Changes
               </Button>
@@ -360,13 +360,13 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
   );
 }
 
-export function SettingsButton({ onClick }: { onClick: () => void }) {
+export function SettingsButton({ onPress }: { onPress: () => void }) {
   return (
     <Button
       isIconOnly
       variant="bordered"
       className="fixed bottom-6 right-6 w-12 h-12 rounded-full flex items-center justify-center opacity-80 hover:bg-white group"
-      onClick={onClick}
+      onPress={onPress}
     >
       <Settings2 size={20} className="text-white group-hover:text-black" />
     </Button>

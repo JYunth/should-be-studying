@@ -23,7 +23,7 @@ function App() {
             </section>
           </div>
         </div>
-        <SettingsButton onClick={() => setIsSettingsOpen(true)} />
+        <SettingsButton onPress={() => setIsSettingsOpen(true)} />
         <SettingsDrawer 
           isOpen={isSettingsOpen} 
           onClose={() => setIsSettingsOpen(false)} 

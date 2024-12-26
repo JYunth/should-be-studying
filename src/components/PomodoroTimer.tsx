@@ -78,7 +78,7 @@ export function PomodoroTimer() {
           isIconOnly
           variant="bordered"
           className="w-12 h-12 rounded-full flex items-center justify-center opacity-80 hover:bg-white group"
-          onClick={toggleTimer}
+          onPress={toggleTimer}
         >
           {isRunning ? 
             <Pause size={20} className="text-white group-hover:text-black" /> : 
@@ -90,7 +90,7 @@ export function PomodoroTimer() {
             isIconOnly
             variant="bordered"
             className="w-12 h-12 rounded-full flex items-center justify-center opacity-80 hover:bg-white group"
-            onClick={skipBreak}
+            onPress={skipBreak}
           >
             <SkipForward size={20} className="text-white group-hover:text-black" />
           </Button>
@@ -99,7 +99,7 @@ export function PomodoroTimer() {
           <Button
             variant="bordered"
             className="h-12 px-4 opacity-80 rounded-full text-white hover:bg-white hover:text-black"
-            onClick={skipWork}
+            onPress={skipWork}
             radius="full"
           >
             skip work

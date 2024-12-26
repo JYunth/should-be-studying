@@ -1,4 +1,3 @@
-import React from 'react';
 import { Plus, Minus, RotateCcw } from 'lucide-react';
 import { Button } from '@nextui-org/react';
 import { useKeyboardCounter } from '../hooks/useKeyboardCounter';
@@ -15,7 +14,7 @@ export function DistractionCounter() {
           isIconOnly
           variant="bordered"
           className="w-12 h-12 rounded-full flex items-center justify-center opacity-80 hover:bg-white group"
-          onClick={decrement}
+          onPress={decrement}
         >
           <Minus size={20} className="text-white group-hover:text-black" />
         </Button>
@@ -23,7 +22,7 @@ export function DistractionCounter() {
           isIconOnly
           variant="bordered"
           className="w-12 h-12 rounded-full flex items-center justify-center opacity-80 hover:bg-white group"
-          onClick={increment}
+          onPress={increment}
         >
           <Plus size={20} className="text-white group-hover:text-black" />
         </Button>
@@ -31,7 +30,7 @@ export function DistractionCounter() {
       <Button
         variant="bordered"
         className="h-12 px-6 opacity-80 rounded-full text-white hover:bg-white hover:text-black group"
-        onClick={reset}
+        onPress={reset}
         startContent={<RotateCcw size={16} className="text-white group-hover:text-black" />}
       >
         <span className="pb-0.5">reset</span>
