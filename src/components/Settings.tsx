@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Drawer, DrawerContent, DrawerBody, DrawerFooter, Button, Input, Select, SelectItem, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Link } from "@nextui-org/react";
+import React, { useState, useEffect, WheelEvent } from 'react';
+import { Drawer, DrawerContent, DrawerBody, DrawerFooter, Button, Input, Select, SelectItem, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Link, User } from "@nextui-org/react";
 import { Settings2 } from 'lucide-react';
 
 interface SettingsDrawerProps {
@@ -24,24 +24,22 @@ const DEFAULT_SETTINGS: TimerSettings = {
   workMinutes: "50",
   breakMinutes: "10",
   longBreakMinutes: "30",
-  workSound: "focus2mc",
-  breakSound: "break1mc"
+  workSound: "minecraft_anvil",
+  breakSound: "minecraft_xp"
 };
 
-// Static arrays for focus and break sounds
 const FOCUS_SOUNDS = [
-  'focus1.mp3',
-  'focus2mc.mp3',
-  'focus3.mp3'
+  'minecraft_anvil',
+  'modern_focus',
+  'mac_startup'
 ];
 
 const BREAK_SOUNDS = [
-  'break1mc.mp3',
-  'break2.mp3',
-  'break3.mp3'
+  'minecraft_xp',
+  'modern_break',
+  'crowd_applause'
 ];
 
-// Add this function at component level
 const playSound = (soundName: string) => {
   const audio = new Audio(`/sounds/${soundName}.mp3`);
   audio.play().catch(error => console.error('Error playing sound:', error));
@@ -51,8 +49,8 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
   const [workTime, setWorkTime] = useState("50");
   const [breakTime, setBreakTime] = useState("10");
   const [longBreakTime, setLongBreakTime] = useState("30");
-  const [workSound, setWorkSound] = useState("focus2mc");
-  const [breakSound, setBreakSound] = useState("break1mc");
+  const [workSound, setWorkSound] = useState("minecraft_anvil");
+  const [breakSound, setBreakSound] = useState("minecraft_xp");
   const [workSoundOptions, setWorkSoundOptions] = useState<SoundOption[]>([]);
   const [breakSoundOptions, setBreakSoundOptions] = useState<SoundOption[]>([]);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
@@ -66,36 +64,37 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
         setWorkTime(settings.workMinutes || "50");
         setBreakTime(settings.breakMinutes || "10");
         setLongBreakTime(settings.longBreakMinutes || "30");
-        setWorkSound(settings.workSound || "focus2mc");
-        setBreakSound(settings.breakSound || "break1mc");
+        setWorkSound(settings.workSound || "minecraft_anvil");
+        setBreakSound(settings.breakSound || "minecraft_xp");
       }
     }
   }, [isOpen]);
 
-  const handleWheel = (e: React.WheelEvent<HTMLInputElement>, setValue: (value: string) => void, currentValue: string) => {
+  const handleWheel = (e: WheelEvent<HTMLInputElement>, setValue: (value: string) => void, currentValue: string) => {
     e.preventDefault();
-    const delta = e.deltaY < 0 ? 1 : -1;
-    const newValue = Math.max(1, Math.min(420, parseInt(currentValue) + delta));
-    setValue(newValue.toString());
+    if (e.deltaY) {
+      const delta = e.deltaY < 0 ? 1 : -1;
+      const newValue = Math.max(1, Math.min(420, parseInt(currentValue) + delta));
+      setValue(newValue.toString());
+    }
   };
 
   useEffect(() => {
-    // Function to format the label from filename
     const formatLabel = (filename: string) => {
-      const name = filename.split('.')[0]; // Remove extension
-      const number = name.match(/\d+/)?.[0] || '';
-      const type = name.replace(/\d+/g, '');
-      return `${type.charAt(0).toUpperCase() + type.slice(1)} Sound ${number}`;
+      return filename
+        .split('_')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
     };
 
     const workOptions: SoundOption[] = FOCUS_SOUNDS.map(file => ({
       label: formatLabel(file),
-      value: file.split('.')[0]
+      value: file
     }));
 
     const breakOptions: SoundOption[] = BREAK_SOUNDS.map(file => ({
       label: formatLabel(file),
-      value: file.split('.')[0]
+      value: file
     }));
 
     setWorkSoundOptions(workOptions);
@@ -115,43 +114,13 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
       workMinutes: workTime || "50",
       breakMinutes: breakTime || "10",
       longBreakMinutes: longBreakTime || "30",
-      workSound: workSound || "focus2mc",
-      breakSound: breakSound || "break1mc"
+      workSound: workSound || "minecraft_anvil",
+      breakSound: breakSound || "minecraft_xp"
     };
     
     localStorage.setItem('timerSettings', JSON.stringify(settings));
     window.dispatchEvent(new Event('settingsUpdated'));
     onClose();
-  };
-
-  const handleNumberInput = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    setValue: (value: string) => void
-  ) => {
-    const value = e.target.value.replace(/\D/g, ''); // Remove any non-digits
-    const numValue = parseInt(value) || 0;
-    if (numValue <= 420) {
-      setValue(value);
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    // Allow: backspace, delete, tab, escape, enter, decimal point, numbers
-    // The lengths I gotta go to provide a seamless experience
-    if (
-      !/[0-9]/.test(e.key) && // numbers
-      e.key !== 'Backspace' &&
-      e.key !== 'Delete' &&
-      e.key !== 'Tab' &&
-      e.key !== 'Escape' &&
-      e.key !== 'Enter' &&
-      e.key !== 'ArrowLeft' &&
-      e.key !== 'ArrowRight' &&
-      e.key !== 'ArrowUp' &&
-      e.key !== 'ArrowDown'
-    ) {
-      e.preventDefault();
-    }
   };
 
   return (
@@ -221,7 +190,8 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
             <Select
               label="Work Sound"
               labelPlacement="outside"
-              placeholder="Select a sound"
+              selectedKeys={[workSound]}
+              placeholder={workSoundOptions.find(opt => opt.value === workSound)?.label || "Select a sound"}
               value={workSound}
               onChange={(e) => {
                 setWorkSound(e.target.value);
@@ -240,8 +210,8 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
               {workSoundOptions.map((sound) => (
                 <SelectItem 
                   key={sound.value} 
-                  value={sound.value} 
-                  className="!text-white hover:!bg-white hover:!text-black data-[selected=true]:!bg-white/20"
+                  value={sound.value}
+                  className="text-white hover:bg-white hover:text-black data-[selected=true]:bg-white/20 data-[selected=true]:text-white transition-all"
                 >
                   {sound.label}
                 </SelectItem>
@@ -250,7 +220,8 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
             <Select
               label="Break Sound"
               labelPlacement="outside"
-              placeholder="Select a sound"
+              selectedKeys={[breakSound]}
+              placeholder={breakSoundOptions.find(opt => opt.value === breakSound)?.label || "Select a sound"}
               value={breakSound}
               onChange={(e) => {
                 setBreakSound(e.target.value);
@@ -269,8 +240,8 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
               {breakSoundOptions.map((sound) => (
                 <SelectItem 
                   key={sound.value} 
-                  value={sound.value} 
-                  className="!text-white hover:!bg-white hover:!text-black data-[selected=true]:!bg-white/20"
+                  value={sound.value}
+                  className="text-white hover:bg-white hover:text-black data-[selected=true]:bg-white/20 data-[selected=true]:text-white transition-all"
                 >
                   {sound.label}
                 </SelectItem>
@@ -324,17 +295,27 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
                     here
                   </Link>.
                 </p>
-                <p className="mt-2">
-                  I am JYunth. I build more stuff like this, if I am bored. You can follow me on{' '}
-                  <Link href="https://x.com/jheyanth_CS" isExternal className="text-white">
-                    X
-                  </Link>.
-                </p>
+                <div className="flex items-center justify-center gap-2 mt-4">
+                  Made with <span role="img" aria-label="heart">❤️</span> by{' '}
+                  <Link 
+                    href="https://linktr.ee/JYunth" 
+                    isExternal
+                  >
+                    <User
+                      name="JYunth"
+                      avatarProps={{
+                        src: "https://utfs.io/f/faV3Ezo4eMA3M43MFlQeuXNDGJldCV5c3THoE1kxOhaWgj42",
+                        className: "ring-2 ring-green-500",
+                        isBordered: true,
+                      }}
+                    />
+                  </Link>
+                </div>
               </ModalBody>
               <ModalFooter>
                 <Button 
                   variant="light" 
-                  onClick={onClose}
+                  onPress={onClose}
                   className="text-white"
                 >
                   Close

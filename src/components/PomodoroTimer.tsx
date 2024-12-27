@@ -17,8 +17,8 @@ export function PomodoroTimer() {
       workMinutes: "50",
       breakMinutes: "10",
       longBreakMinutes: "30",
-      workSound: "focus2mc",
-      breakSound: "break1mc"
+      workSound: "minecraft_anvil",
+      breakSound: "minecraft_xp"
     };
   };
 
