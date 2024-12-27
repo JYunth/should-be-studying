@@ -123,6 +123,15 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
     onClose();
   };
 
+  const handleInputBlur = (value: string, setValue: (value: string) => void) => {
+    const numValue = parseInt(value);
+    if (numValue > 420 || numValue < 1) {
+      setTimeout(() => {
+        setValue(''); // Clear the field after 1 second
+      }, 500);
+    }
+  };
+
   return (
     <>
       <Drawer 
@@ -145,9 +154,11 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
                 placeholder={DEFAULT_SETTINGS.workMinutes}
                 value={workTime}
                 onChange={(e) => setWorkTime(e.target.value)}
+                onBlur={(e) => handleInputBlur(e.target.value, setWorkTime)}
                 onWheel={(e) => handleWheel(e, setWorkTime, workTime)}
                 min={1}
                 max={420}
+                errorMessage={parseInt(workTime) > 420 ? "Please select a value that is no more than 420" : ""}
                 classNames={{
                   label: "!text-white",
                   input: "!bg-white/10 !text-white",
@@ -161,9 +172,11 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
                 placeholder={DEFAULT_SETTINGS.breakMinutes}
                 value={breakTime}
                 onChange={(e) => setBreakTime(e.target.value)}
+                onBlur={(e) => handleInputBlur(e.target.value, setBreakTime)}
                 onWheel={(e) => handleWheel(e, setBreakTime, breakTime)}
                 min={1}
                 max={420}
+                errorMessage={parseInt(breakTime) > 420 ? "Please select a value that is no more than 420" : ""}
                 classNames={{
                   label: "!text-white",
                   input: "!bg-white/10 !text-white",
@@ -177,9 +190,11 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
                 placeholder={DEFAULT_SETTINGS.longBreakMinutes}
                 value={longBreakTime}
                 onChange={(e) => setLongBreakTime(e.target.value)}
+                onBlur={(e) => handleInputBlur(e.target.value, setLongBreakTime)}
                 onWheel={(e) => handleWheel(e, setLongBreakTime, longBreakTime)}
                 min={1}
                 max={420}
+                errorMessage={parseInt(longBreakTime) > 420 ? "Please select a value that is no more than 420" : ""}
                 classNames={{
                   label: "!text-white",
                   input: "!bg-white/10 !text-white",
