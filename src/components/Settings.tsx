@@ -171,61 +171,49 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
             <div className="grid grid-cols-3 gap-4">
               <Input
                 label="Work"
+                type="number"
                 labelPlacement="outside"
                 placeholder={DEFAULT_SETTINGS.workMinutes}
                 value={workTime}
-                onChange={(e) => handleNumberInput(e, setWorkTime)}
-                onKeyDown={handleKeyDown}
-                type="text"
-                pattern="[0-9]*"
-                inputMode="numeric"
-                min="1"
-                max="420"
-                step="1"
+                onChange={(e) => setWorkTime(e.target.value)}
                 onWheel={(e) => handleWheel(e, setWorkTime, workTime)}
+                min={1}
+                max={420}
                 classNames={{
                   label: "!text-white",
-                  input: "!bg-white/10 !text-white placeholder:!text-white",
+                  input: "!bg-white/10 !text-white",
                   inputWrapper: "!bg-white/10"
                 }}
               />
               <Input
                 label="Break"
+                type="number"
                 labelPlacement="outside"
                 placeholder={DEFAULT_SETTINGS.breakMinutes}
                 value={breakTime}
-                onChange={(e) => handleNumberInput(e, setBreakTime)}
-                onKeyDown={handleKeyDown}
-                type="text"
-                pattern="[0-9]*"
-                inputMode="numeric"
-                min="1"
-                max="420"
-                step="1"
+                onChange={(e) => setBreakTime(e.target.value)}
                 onWheel={(e) => handleWheel(e, setBreakTime, breakTime)}
+                min={1}
+                max={420}
                 classNames={{
                   label: "!text-white",
-                  input: "!bg-white/10 !text-white placeholder:!text-white",
+                  input: "!bg-white/10 !text-white",
                   inputWrapper: "!bg-white/10"
                 }}
               />
               <Input
                 label="Long Break"
+                type="number"
                 labelPlacement="outside"
                 placeholder={DEFAULT_SETTINGS.longBreakMinutes}
                 value={longBreakTime}
-                onChange={(e) => handleNumberInput(e, setLongBreakTime)}
-                onKeyDown={handleKeyDown}
-                type="text"
-                pattern="[0-9]*"
-                inputMode="numeric"
-                min="1"
-                max="420"
-                step="1"
+                onChange={(e) => setLongBreakTime(e.target.value)}
                 onWheel={(e) => handleWheel(e, setLongBreakTime, longBreakTime)}
+                min={1}
+                max={420}
                 classNames={{
                   label: "!text-white",
-                  input: "!bg-white/10 !text-white placeholder:!text-white",
+                  input: "!bg-white/10 !text-white",
                   inputWrapper: "!bg-white/10"
                 }}
               />
