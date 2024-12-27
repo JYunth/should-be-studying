@@ -1,21 +1,29 @@
 import { useState, useEffect, useRef } from 'react';
-import { TimerMode } from '../types/timer';
+import { TimerMode, TimerSettings } from '../types/timer';
 
-export const useTimer = (initialDuration: number) => {
+export const useTimer = (initialDuration: number, settings: TimerSettings) => {
   const [timeLeft, setTimeLeft] = useState(initialDuration);
   const [isRunning, setIsRunning] = useState(false);
   const [mode, setMode] = useState<TimerMode>('work');
   const [cycles, setCycles] = useState(0);
   
-  // Add sound references
-  const workSoundRef = useRef(new Audio('/sounds/focus2mc.mp3'));
-  const breakSoundRef = useRef(new Audio('/sounds/break1mc.mp3'));
+  const workSoundRef = useRef(new Audio(`/sounds/${settings.workSound}.mp3`));
+  const breakSoundRef = useRef(new Audio(`/sounds/${settings.breakSound}.mp3`));
+
+  // Update sound references when settings change
+  useEffect(() => {
+    workSoundRef.current = new Audio(`/sounds/${settings.workSound}.mp3`);
+    breakSoundRef.current = new Audio(`/sounds/${settings.breakSound}.mp3`);
+  }, [settings.workSound, settings.breakSound]);
 
   const getDuration = (mode: TimerMode): number => {
     switch (mode) {
-      case 'work': return 50 * 60;
-      case 'break': return 10 * 60;
-      case 'longBreak': return 30 * 60;
+      case 'work': 
+        return Math.max(1, parseInt(settings.workMinutes) || 50) * 60;
+      case 'break': 
+        return Math.max(1, parseInt(settings.breakMinutes) || 10) * 60;
+      case 'longBreak': 
+        return Math.max(1, parseInt(settings.longBreakMinutes) || 30) * 60;
     }
   };
 
