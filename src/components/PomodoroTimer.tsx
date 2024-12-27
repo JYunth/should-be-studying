@@ -62,11 +62,6 @@ export function PomodoroTimer() {
     setIsRunning(false);
   };
 
-  const skipWork = () => {
-    setTimeLeft(5);
-    setIsRunning(true);
-  };
-
   return (
     <div className="flex flex-col items-center space-y-6 text-white">
       <h2 className="text-2xl font-light text-gray-400">pomodoro timer</h2>
@@ -93,16 +88,6 @@ export function PomodoroTimer() {
             onPress={skipBreak}
           >
             <SkipForward size={20} className="text-white group-hover:text-black" />
-          </Button>
-        )}
-        {mode === 'work' && (
-          <Button
-            variant="bordered"
-            className="h-12 px-4 opacity-80 rounded-full text-white hover:bg-white hover:text-black"
-            onPress={skipWork}
-            radius="full"
-          >
-            skip work
           </Button>
         )}
       </div>

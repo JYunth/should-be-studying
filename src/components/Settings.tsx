@@ -1,4 +1,4 @@
-import React, { useState, useEffect, WheelEvent } from 'react';
+import { useState, useEffect, WheelEvent } from 'react';
 import { Drawer, DrawerContent, DrawerBody, DrawerFooter, Button, Input, Select, SelectItem, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Link, User } from "@nextui-org/react";
 import { Settings2 } from 'lucide-react';
 
