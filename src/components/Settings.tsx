@@ -1,5 +1,5 @@
 import { useState, useEffect, WheelEvent } from 'react';
-import { Drawer, DrawerContent, DrawerBody, DrawerFooter, Button, Input, Select, SelectItem, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Link, User } from "@nextui-org/react";
+import { Drawer, DrawerContent, DrawerBody, DrawerFooter, Button, Input, Select, SelectItem, Modal, ModalContent, ModalHeader, ModalBody, Link, User } from "@nextui-org/react";
 import { Settings2 } from 'lucide-react';
 
 interface SettingsDrawerProps {
@@ -128,7 +128,7 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
     if (numValue > 420 || numValue < 1) {
       setTimeout(() => {
         setValue(''); // Clear the field after 1 second
-      }, 500);
+      }, 250);
     }
   };
 
@@ -139,6 +139,7 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
         onClose={onClose} 
         placement="right"
         backdrop="blur"
+        hideCloseButton
       >
         <DrawerContent className="bg-black/95 shadow-[0_0_35px_-5px_rgba(255,255,255,0.3)] border-l border-white/[0.05]">
           <div className="flex flex-col items-center pt-6">
@@ -300,7 +301,7 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
         }}
       >
         <ModalContent>
-          {(onClose) => (
+          {() => (
             <>
               <ModalHeader className="text-white">About</ModalHeader>
               <ModalBody className="text-white/80">
@@ -327,15 +328,6 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
                   </Link>
                 </div>
               </ModalBody>
-              <ModalFooter>
-                <Button 
-                  variant="light" 
-                  onPress={onClose}
-                  className="text-white"
-                >
-                  Close
-                </Button>
-              </ModalFooter>
             </>
           )}
         </ModalContent>
