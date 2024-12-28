@@ -15,6 +15,7 @@ export function DistractionCounter() {
           variant="bordered"
           className="w-12 h-12 rounded-full flex items-center justify-center opacity-80 hover:bg-white group"
           onPress={decrement}
+          onKeyDown={(e) => e.key === ' ' && decrement()}
         >
           <Minus size={20} className="text-white group-hover:text-black" />
         </Button>
@@ -23,6 +24,7 @@ export function DistractionCounter() {
           variant="bordered"
           className="w-12 h-12 rounded-full flex items-center justify-center opacity-80 hover:bg-white group"
           onPress={increment}
+          onKeyDown={(e) => e.key === ' ' && increment()}
         >
           <Plus size={20} className="text-white group-hover:text-black" />
         </Button>
@@ -31,6 +33,7 @@ export function DistractionCounter() {
         variant="bordered"
         className="h-12 px-6 opacity-80 rounded-full text-white hover:bg-white hover:text-black group"
         onPress={reset}
+        onKeyDown={(e) => e.key === ' ' && reset()}
         startContent={<RotateCcw size={16} className="text-white group-hover:text-black" />}
       >
         <span className="pb-0.5">reset</span>

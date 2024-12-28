@@ -304,27 +304,45 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
           {() => (
             <>
               <ModalHeader className="text-white">About</ModalHeader>
-              <ModalBody className="text-white/80">
+              <ModalBody className="text-white/80 pb-6">
                 <p>
                   Thank you for using my app! I hope it helps you stay focused and productive. This app is completely open source, you can contribute{' '}
                   <Link href="https://github.com/JYunth/should-be-studying" isExternal className="text-white">
                     here
                   </Link>.
                 </p>
-                <div className="flex items-center justify-center gap-2 mt-4">
-                  Made with <span role="img" aria-label="heart">❤️</span> by{' '}
-                  <Link 
-                    href="https://linktr.ee/JYunth" 
+                <div className="flex flex-col items-center gap-4 mt-4">
+                  <div className="flex items-center justify-center gap-2">
+                    Made with <span role="img" aria-label="heart">❤️</span> by{' '}
+                    <Link 
+                      href="https://linktr.ee/JYunth" 
+                      isExternal
+                      className="pl-1"
+                    >
+                      <User
+                        name="JYunth"
+                        classNames={{
+                          name: "text-white"
+                        }}
+                        avatarProps={{
+                          src: "https://utfs.io/f/faV3Ezo4eMA3M43MFlQeuXNDGJldCV5c3THoE1kxOhaWgj42",
+                          className: "ring-2 ring-green-500",
+                          isBordered: true,
+                        }}
+                      />
+                    </Link>
+                  </div>
+                  <Link
+                    href="https://www.buymeacoffee.com/jyunth"
                     isExternal
+                    className="inline-flex items-center px-2 py-1.5 bg-[#FF813F] hover:opacity-85 text-white rounded-md shadow-[0px_1px_2px_rgba(190,190,190,0.5)] hover:shadow-[0px_1px_2px_2px_rgba(190,190,190,0.5)] transition-all duration-300"
                   >
-                    <User
-                      name="JYunth"
-                      avatarProps={{
-                        src: "https://utfs.io/f/faV3Ezo4eMA3M43MFlQeuXNDGJldCV5c3THoE1kxOhaWgj42",
-                        className: "ring-2 ring-green-500",
-                        isBordered: true,
-                      }}
+                    <img 
+                      src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" 
+                      alt="Buy me a coffee" 
+                      className="h-[18px] w-[19px] mb-[1px]"
                     />
+                    <span className="ml-2 text-base font-[cursive]">Buy me a coffee</span>
                   </Link>
                 </div>
               </ModalBody>
