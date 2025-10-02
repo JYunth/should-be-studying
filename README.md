@@ -15,6 +15,7 @@
 - [x] Add sound for work and break ending (MOST IMP)
 - [x] Add vercel Analytics and setup a dashboard
 - [x] add subtle animation to dots
-- [ ] add a settings button and a modal for time setting
-- [ ] add smol footer
-- [ ] remove test
+- [x] add a settings button and a modal for time setting
+- [x] add smol footer
+- [x] remove test
+- [ ] A way for people to choose a mp3 file of choice for the background music during work timer (using temporary file link passed to audio streamer)
