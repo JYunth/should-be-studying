@@ -2,6 +2,7 @@ import { PomodoroTimer } from './components/PomodoroTimer';
 import { DistractionCounter } from './components/DistractionCounter';
 import { NextUIProvider } from '@nextui-org/react';
 import { SettingsDrawer, SettingsButton } from './components/Settings';
+import { FullscreenButton } from './components/FullscreenButton';
 import { useState } from 'react';
 
 function App() {
@@ -10,11 +11,11 @@ function App() {
   return (
     <NextUIProvider>
       <main className="h-screen bg-black overflow-hidden">
-        <div className="h-full container mx-auto px-4 py-8">
-          <h1 className="text-center text-white/80 text-xl font-thin tracking-wider mb-12">
+        <div className="h-full container mx-auto px-4 py-4 flex flex-col">
+          <h1 className="text-center text-white/80 text-xl font-thin tracking-wider mb-4">
             should be studying.
           </h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-[calc(100%-5rem)]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 flex-1 my-auto">
             <section className="flex items-center justify-center border-b md:border-b-0 md:border-r border-white/10 p-8">
               <PomodoroTimer />
             </section>
@@ -23,6 +24,7 @@ function App() {
             </section>
           </div>
         </div>
+        <FullscreenButton />
         <SettingsButton onPress={() => setIsSettingsOpen(true)} />
         <SettingsDrawer 
           isOpen={isSettingsOpen} 
