@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button } from "@nextui-org/react";
+import { Button } from "@heroui/react";
 import { Maximize2, Minimize2 } from 'lucide-react';
 
 export function FullscreenButton() {
@@ -30,7 +30,7 @@ export function FullscreenButton() {
     <Button
       isIconOnly
       variant="bordered"
-      className="fixed bottom-20 right-6 w-12 h-12 rounded-full flex items-center justify-center opacity-80 hover:bg-white group md:hidden"
+      className="fixed bottom-20 right-6 w-12 h-12 rounded-full flex items-center justify-center opacity-80 hover:bg-white group"
       onPress={toggleFullscreen}
     >
       {isFullscreen ? (

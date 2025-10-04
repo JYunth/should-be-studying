@@ -1,5 +1,5 @@
 import { Plus, Minus, RotateCcw } from 'lucide-react';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import { useKeyboardCounter } from '../hooks/useKeyboardCounter';
 
 export function DistractionCounter() {

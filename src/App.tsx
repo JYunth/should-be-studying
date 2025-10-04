@@ -1,6 +1,6 @@
 import { PomodoroTimer } from './components/PomodoroTimer';
 import { DistractionCounter } from './components/DistractionCounter';
-import { NextUIProvider } from '@nextui-org/react';
+import { HeroUIProvider } from '@heroui/react';
 import { SettingsDrawer, SettingsButton } from './components/Settings';
 import { FullscreenButton } from './components/FullscreenButton';
 import { useState } from 'react';
@@ -9,7 +9,7 @@ function App() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   return (
-    <NextUIProvider>
+    <HeroUIProvider>
       <main className="h-screen bg-black overflow-hidden">
         <div className="h-full container mx-auto px-4 py-4 flex flex-col">
           <h1 className="text-center text-white/80 text-xl font-thin tracking-wider mb-4">
@@ -26,12 +26,12 @@ function App() {
         </div>
         <FullscreenButton />
         <SettingsButton onPress={() => setIsSettingsOpen(true)} />
-        <SettingsDrawer 
-          isOpen={isSettingsOpen} 
-          onClose={() => setIsSettingsOpen(false)} 
+        <SettingsDrawer
+          isOpen={isSettingsOpen}
+          onClose={() => setIsSettingsOpen(false)}
         />
       </main>
-    </NextUIProvider>
+    </HeroUIProvider>
   );
 }
 

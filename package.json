@@ -10,10 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@nextui-org/button": "^2.2.8",
-    "@nextui-org/react": "^2.6.10",
-    "@nextui-org/system": "^2.4.5",
-    "@nextui-org/theme": "^2.4.4",
+    "@heroui/button": "^2.2.8",
+    "@heroui/react": "^2.6.10",
+    "@heroui/system": "^2.4.5",
+    "@heroui/theme": "^2.4.4",
     "@vercel/analytics": "^1.4.1",
     "framer-motion": "^11.15.0",
     "lucide-react": "^0.344.0",

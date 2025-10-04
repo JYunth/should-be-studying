@@ -1,5 +1,5 @@
 import { useState, useEffect, WheelEvent } from 'react';
-import { Drawer, DrawerContent, DrawerBody, DrawerFooter, Button, Input, Select, SelectItem, Modal, ModalContent, ModalHeader, ModalBody, Link, User } from "@nextui-org/react";
+import { Drawer, DrawerContent, DrawerBody, DrawerFooter, Button, Input, Select, SelectItem, Modal, ModalContent, ModalHeader, ModalBody, Link, User } from "@heroui/react";
 import { Settings2 } from 'lucide-react';
 
 interface SettingsDrawerProps {
@@ -117,7 +117,7 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
       workSound: workSound || "minecraft_anvil",
       breakSound: breakSound || "minecraft_xp"
     };
-    
+
     localStorage.setItem('timerSettings', JSON.stringify(settings));
     window.dispatchEvent(new Event('settingsUpdated'));
     onClose();
@@ -134,9 +134,9 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
 
   return (
     <>
-      <Drawer 
-        isOpen={isOpen} 
-        onClose={onClose} 
+      <Drawer
+        isOpen={isOpen}
+        onClose={onClose}
         placement="right"
         backdrop="blur"
         hideCloseButton
@@ -224,8 +224,8 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
               }}
             >
               {workSoundOptions.map((sound) => (
-                <SelectItem 
-                  key={sound.value} 
+                <SelectItem
+                  key={sound.value}
                   value={sound.value}
                   className="text-white hover:bg-white hover:text-black data-[selected=true]:bg-white/20 data-[selected=true]:text-white transition-all"
                 >
@@ -254,8 +254,8 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
               }}
             >
               {breakSoundOptions.map((sound) => (
-                <SelectItem 
-                  key={sound.value} 
+                <SelectItem
+                  key={sound.value}
                   value={sound.value}
                   className="text-white hover:bg-white hover:text-black data-[selected=true]:bg-white/20 data-[selected=true]:text-white transition-all"
                 >
@@ -291,8 +291,8 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
         </DrawerContent>
       </Drawer>
 
-      <Modal 
-        isOpen={isAboutOpen} 
+      <Modal
+        isOpen={isAboutOpen}
         onClose={() => setIsAboutOpen(false)}
         size="md"
         backdrop="blur"
@@ -314,8 +314,8 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
                 <div className="flex flex-col items-center gap-4 mt-4">
                   <div className="flex items-center justify-center gap-2">
                     Made with <span role="img" aria-label="heart">❤️</span> by{' '}
-                    <Link 
-                      href="https://linktr.ee/JYunth" 
+                    <Link
+                      href="https://linktr.ee/JYunth"
                       isExternal
                       className="pl-1"
                     >
@@ -325,7 +325,7 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
                           name: "text-white"
                         }}
                         avatarProps={{
-                          src: "https://utfs.io/f/faV3Ezo4eMA3M43MFlQeuXNDGJldCV5c3THoE1kxOhaWgj42",
+                          src: "pfp.jpg",
                           className: "ring-2 ring-green-500",
                           isBordered: true,
                         }}
@@ -337,9 +337,9 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
                     isExternal
                     className="inline-flex items-center px-2 py-1.5 bg-[#FF813F] hover:opacity-85 text-white rounded-md shadow-[0px_1px_2px_rgba(190,190,190,0.5)] hover:shadow-[0px_1px_2px_2px_rgba(190,190,190,0.5)] transition-all duration-300"
                   >
-                    <img 
-                      src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" 
-                      alt="Buy me a coffee" 
+                    <img
+                      src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg"
+                      alt="Buy me a coffee"
                       className="h-[18px] w-[19px] mb-[1px]"
                     />
                     <span className="ml-2 text-base font-[cursive]">Buy me a coffee</span>
