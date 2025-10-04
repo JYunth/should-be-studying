@@ -107,7 +107,7 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
     if (!breakSound && breakOptions.length > 0) {
       setBreakSound(breakOptions[0].value);
     }
-  }, []);
+   }, [workSound, breakSound]);
 
   const handleSave = () => {
     const settings: TimerSettings = {
@@ -203,16 +203,16 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
                 }}
               />
             </div>
-            <Select
-              label="Work Sound"
-              labelPlacement="outside"
-              selectedKeys={[workSound]}
-              placeholder={workSoundOptions.find(opt => opt.value === workSound)?.label || "Select a sound"}
-              value={workSound}
-              onChange={(e) => {
-                setWorkSound(e.target.value);
-                playSound(e.target.value);
-              }}
+             <Select
+               label="Work Sound"
+               labelPlacement="outside"
+               selectedKeys={new Set([workSound])}
+               placeholder={workSoundOptions.find(opt => opt.value === workSound)?.label || "Select a sound"}
+               onSelectionChange={(keys) => {
+                 const selected = Array.from(keys)[0] as string;
+                 setWorkSound(selected);
+                 playSound(selected);
+               }}
               classNames={{
                 label: "!text-white",
                 trigger: "!bg-white/10",
@@ -223,26 +223,25 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
                 selectorIcon: "!text-white"
               }}
             >
-              {workSoundOptions.map((sound) => (
-                <SelectItem
-                  key={sound.value}
-                  value={sound.value}
-                  className="text-white hover:bg-white hover:text-black data-[selected=true]:bg-white/20 data-[selected=true]:text-white transition-all"
-                >
-                  {sound.label}
-                </SelectItem>
-              ))}
+               {workSoundOptions.map((sound) => (
+                 <SelectItem
+                   key={sound.value}
+                   className="text-white hover:bg-white hover:text-black data-[selected=true]:bg-white/20 data-[selected=true]:text-white transition-all"
+                 >
+                   {sound.label}
+                 </SelectItem>
+               ))}
             </Select>
-            <Select
-              label="Break Sound"
-              labelPlacement="outside"
-              selectedKeys={[breakSound]}
-              placeholder={breakSoundOptions.find(opt => opt.value === breakSound)?.label || "Select a sound"}
-              value={breakSound}
-              onChange={(e) => {
-                setBreakSound(e.target.value);
-                playSound(e.target.value);
-              }}
+             <Select
+               label="Break Sound"
+               labelPlacement="outside"
+               selectedKeys={new Set([breakSound])}
+               placeholder={breakSoundOptions.find(opt => opt.value === breakSound)?.label || "Select a sound"}
+               onSelectionChange={(keys) => {
+                 const selected = Array.from(keys)[0] as string;
+                 setBreakSound(selected);
+                 playSound(selected);
+               }}
               classNames={{
                 label: "!text-white",
                 trigger: "!bg-white/10",
@@ -253,15 +252,14 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
                 selectorIcon: "!text-white"
               }}
             >
-              {breakSoundOptions.map((sound) => (
-                <SelectItem
-                  key={sound.value}
-                  value={sound.value}
-                  className="text-white hover:bg-white hover:text-black data-[selected=true]:bg-white/20 data-[selected=true]:text-white transition-all"
-                >
-                  {sound.label}
-                </SelectItem>
-              ))}
+               {breakSoundOptions.map((sound) => (
+                 <SelectItem
+                   key={sound.value}
+                   className="text-white hover:bg-white hover:text-black data-[selected=true]:bg-white/20 data-[selected=true]:text-white transition-all"
+                 >
+                   {sound.label}
+                 </SelectItem>
+               ))}
             </Select>
           </DrawerBody>
           <DrawerFooter className="flex gap-4 justify-between">
