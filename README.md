@@ -19,3 +19,6 @@
 - [x] add smol footer
 - [x] remove test
 - [ ] A way for people to choose a mp3 file of choice for the background music during work timer (using temporary file link passed to audio streamer)
+- [ ] Click/tap the should be studying title to enter what they are doing at the moment
+- [ ] Pomodoros get registered under that activity
+- [ ] Analytics are shown as pie chart in user defined time periods
